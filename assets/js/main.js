@@ -93,6 +93,8 @@
         '',
         'Quedo a la espera de su respuesta. Muchas gracias.'
       ].join('\n');
+      // La preparación del mensaje no garantiza su envío desde WhatsApp.
+      window.MIRO_TRACK?.('whatsapp_form_handoff', {contact_channel:'whatsapp', form_type:'consulta_comercial'});
       const url='https://wa.me/' + wa + '?text=' + encodeURIComponent(detail);
       // Se abre desde la acción explícita del visitante. Nada se envía sin su confirmación en WhatsApp.
       setNote('Tu mensaje está listo. Confirmá el envío desde WhatsApp; MIRÓ no lo recibe hasta entonces.',true);
