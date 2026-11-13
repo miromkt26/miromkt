@@ -6,6 +6,7 @@
   const form = document.getElementById('contact-form');
   const submit = document.getElementById('submit-contact');
   const direct = document.getElementById('direct-links');
+  const heroWhatsapp = document.getElementById('hero-whatsapp');
   document.getElementById('year').textContent = new Date().getFullYear();
 
   function closeMenu() {
@@ -25,6 +26,14 @@
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cfg.contactEmail || '');
   const hasEndpoint = /^https:\/\//i.test(cfg.formEndpoint || '');
   const wa = String(cfg.whatsappNumber || '').replace(/\D/g,'');
+  const greeting='Hola, equipo de MIRÓ. Quisiera conocer sus servicios de marketing y publicidad y coordinar una primera conversación.';
+  const directWaUrl=wa ? 'https://wa.me/' + wa + '?text=' + encodeURIComponent(greeting) : '';
+  if (heroWhatsapp && wa) {
+    heroWhatsapp.href=directWaUrl;
+    heroWhatsapp.target='_blank';
+    heroWhatsapp.rel='noopener noreferrer';
+    heroWhatsapp.innerHTML='Conversemos por WhatsApp <span aria-hidden="true">↗</span>';
+  }
   if (isEmail || wa || /^https:\/\//i.test(cfg.appointmentUrl || '')) {
     direct.hidden = false;
     if (isEmail) {
@@ -32,7 +41,7 @@
       a.textContent = cfg.contactEmail; a.className = 'contact-inline-link'; direct.append(a);
     }
     if (wa) {
-      const a = document.createElement('a'); a.href = 'https://wa.me/' + wa;
+      const a = document.createElement('a'); a.href = directWaUrl;
       a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Escribir por WhatsApp ↗';
       a.className='contact-inline-link'; direct.append(a);
     }
@@ -45,6 +54,9 @@
   if (hasEndpoint) {
     submit.innerHTML='Enviar consulta <span aria-hidden="true">↗</span>';
     note.textContent='Tu consulta será enviada a MIRÓ mediante el formulario configurado.';
+  } else if (wa) {
+    submit.innerHTML='Continuar por WhatsApp <span aria-hidden="true">↗</span>';
+    note.textContent='Al continuar se abrirá WhatsApp con tu consulta preparada. Revisá y confirmá el envío desde allí.';
   } else if (isEmail) {
     submit.innerHTML='Enviar por correo <span aria-hidden="true">↗</span>';
     note.textContent='Al enviar, se abrirá tu aplicación de correo con el mensaje preparado.';
@@ -69,6 +81,22 @@
       } catch {
         setNote('No se pudo enviar la consulta. Intentá nuevamente o utilizá otro canal de contacto.');
       } finally { submit.disabled=false; }
+    } else if (wa) {
+      const detail = [
+        'Hola, equipo de MIRÓ. Quisiera realizar una consulta comercial:',
+        '',
+        '*Nombre:* ' + name,
+        '*Empresa:* ' + (company || 'No indicada'),
+        ...(email ? ['*Correo:* ' + email] : []),
+        '*Servicio:* ' + service,
+        '*Consulta:* ' + message,
+        '',
+        'Quedo a la espera de su respuesta. Muchas gracias.'
+      ].join('\n');
+      const url='https://wa.me/' + wa + '?text=' + encodeURIComponent(detail);
+      // Se abre desde la acción explícita del visitante. Nada se envía sin su confirmación en WhatsApp.
+      setNote('Tu mensaje está listo. Confirmá el envío desde WhatsApp; MIRÓ no lo recibe hasta entonces.',true);
+      window.location.assign(url);
     } else if (isEmail) {
       window.location.href='mailto:'+cfg.contactEmail+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
       setNote('Se abrió tu aplicación de correo. El mensaje todavía debe enviarse desde allí.',true);

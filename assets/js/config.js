@@ -5,7 +5,7 @@
  */
 window.MIRO_CONFIG = {
   contactEmail: "",            // Ejemplo: "hola@tudominio.com"
-  whatsappNumber: "",          // Solo dígitos, con prefijo internacional. Ej.: "54911XXXXXXXX"
+  whatsappNumber: "5493624187073",          // Solo dígitos, con prefijo internacional. Ej.: "54911XXXXXXXX"
   appointmentUrl: "",          // URL completa de un servicio de agenda, opcional
   formEndpoint: ""             // Endpoint HTTPS real (ej.: Formspree), opcional
 };

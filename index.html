@@ -53,7 +53,7 @@
         <h1 id="hero-title">Creatividad que<br />marca la <span class="gradient-text">diferencia.</span></h1>
         <p class="hero-deck">Estrategia, ideas y tecnología trabajando juntas para transformar desafíos de comunicación en oportunidades de crecimiento.</p>
         <div class="hero-actions">
-          <a href="#contacto" class="btn btn-primary">Conversemos sobre tu marca <span aria-hidden="true">↗</span></a>
+          <a id="hero-whatsapp" href="#contacto" class="btn btn-primary">Conversemos sobre tu marca <span aria-hidden="true">↗</span></a>
           <a href="#servicios" class="btn btn-text">Explorar soluciones <span aria-hidden="true">↓</span></a>
         </div>
         <div class="hero-points" aria-label="Capacidades">
@@ -120,12 +120,12 @@
         <div class="contact-card"><div class="form-title"><span class="signal-dot"></span><span>INICIEMOS UNA CONVERSACIÓN</span></div>
           <form id="contact-form" novalidate>
             <div class="form-row"><label>Nombre y apellido <input name="nombre" type="text" autocomplete="name" required minlength="2" placeholder="Tu nombre" /></label><label>Empresa <input name="empresa" type="text" autocomplete="organization" placeholder="Tu empresa (opcional)" /></label></div>
-            <label>Correo electrónico <input name="correo" type="email" autocomplete="email" required placeholder="nombre@empresa.com" /></label>
+            <label>Correo electrónico (opcional) <input name="correo" type="email" autocomplete="email" placeholder="nombre@empresa.com" /></label>
             <label>¿En qué podemos ayudarte? <select name="servicio" required><option value="">Elegí una opción</option><option>Identidad de marca y estrategia</option><option>Diseño, producción y contenidos</option><option>Marketing digital y publicidad</option><option>Web, IA y automatizaciones</option><option>Campañas o proyecto especial</option><option>Necesito asesoramiento</option></select></label>
-            <label>Contanos tu idea <textarea name="mensaje" rows="4" required minlength="10" placeholder="Qué necesitás, qué objetivos tenés y cuándo te gustaría comenzar..."></textarea></label>
+            <label>Contanos tu idea <textarea name="mensaje" rows="4" required minlength="10" maxlength="1200" placeholder="Qué necesitás, qué objetivos tenés y cuándo te gustaría comenzar..."></textarea></label>
             <button class="btn btn-primary submit" type="submit" id="submit-contact">Preparar consulta <span aria-hidden="true">↗</span></button>
-            <p class="form-note" id="form-note" role="status" aria-live="polite">En esta versión preliminar, el formulario prepara tu consulta. Habilitaremos el envío directo al configurar el canal oficial de MIRÓ.</p>
-            <p class="privacy-note">Usaremos la información que compartas únicamente para responder a tu consulta cuando el canal de recepción esté configurado.</p>
+            <p class="form-note" id="form-note" role="status" aria-live="polite">Al continuar, se abrirá WhatsApp con tu mensaje listo. Vas a poder revisarlo antes de enviarlo.</p>
+            <p class="privacy-note">Este formulario no almacena ni envía tus datos a un servidor. Abre WhatsApp con el mensaje preparado; el envío ocurre solo si lo confirmás allí.</p>
           </form>
         </div>
       </div>
